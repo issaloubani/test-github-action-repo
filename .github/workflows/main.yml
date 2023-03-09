@@ -47,6 +47,7 @@ jobs:
           git config --global user.email "issa.loubani.5@gmail.com"
           git config --global user.name "Issa Loubani"
           git remote add origin "https://github.com/issaloubani/test-github-action-repo.git"
+          git checkout main
           git add -A
           git commit -m "Update web app"
           git push --force origin main
