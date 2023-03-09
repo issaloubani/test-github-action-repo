@@ -6,7 +6,9 @@ on:
       - main
     paths:
       - 'external-repo/**'
-
+  
+  workflow_dispatch:
+  
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
