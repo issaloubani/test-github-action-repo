@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: issaloubani/portfolio-web
-          ref: main
+          ref: $BASE_BRANCH
           path: external-repo
 
       - name: Set up Flutter
