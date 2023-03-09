@@ -1,0 +1,51 @@
+name: Build and deploy Flutter web app
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'external-repo/**'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout external repo
+        uses: actions/checkout@v2
+        with:
+          repository: issaloubani/portfolio-web
+          ref: main
+          path: external-repo
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+
+      - name: Build web app
+        run: flutter build web
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: web-build
+          path: build/web
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: web-build
+          path: build-web
+
+      - name: Copy build files to current repo
+        run: |
+          cp -r build-web/* .
+          rm -rf build-web
+
+      - name: Commit and push changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: 'Update web build'
+          push: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
