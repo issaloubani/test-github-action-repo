@@ -27,18 +27,18 @@ jobs:
           flutter-version: '2.10.5'
           
       - name: Get dependencies
-        working-directory: ${{ github.workspace }}/portfolio-web
+        working-directory: ${{ github.workspace }}
         run: flutter pub get
         
       - name: Build web app
         run: flutter build web --release --web-renderer=html --no-sound-null-safety
-        working-directory: ${{ github.workspace }}/portfolio-web
+        working-directory: ${{ github.workspace }}
         
       - name: Copy built files to main branch
         run: |
           rm -rf ./build
           mkdir build
-          cp -r ./portfolio-web/build/web/* ./build/
+          cp -r build/web/* ./build/
           git config --global user.email "issa.loubani.5@gmail.com"
           git config --global user.name "Issa Loubani"
           git add -A
