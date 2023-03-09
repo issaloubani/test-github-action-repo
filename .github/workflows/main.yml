@@ -6,7 +6,8 @@ on:
       - master
     paths:
       - 'portfolio-web/**'
-
+  workflow_dispatch:
+  
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
