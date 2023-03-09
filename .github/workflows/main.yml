@@ -48,7 +48,7 @@ jobs:
           git config --global user.name "Issa Loubani"
           git add -A
           git commit -m "Update web app"
-          git remote add origin "https://github.com/${{ env.GITHUB_REPOSITORY}}.git"
+          git remote add origin "https://github.com/issaloubani/test-github-action-repo.git"
           git push --force origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
