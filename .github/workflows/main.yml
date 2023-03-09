@@ -22,7 +22,9 @@ jobs:
           
       - name: Get dependencies
         working-directory: ${{ github.workspace }}/portfolio-web
-        run: flutter pub get
+        run: |
+          ls
+          flutter pub get
         
       - name: Build web app
         run: flutter build web --release --web-renderer=html --no-sound-null-safety
