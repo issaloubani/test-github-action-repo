@@ -21,8 +21,9 @@ jobs:
           flutter-version: '2.10.5'
           
       - name: Get dependencies
-        run: flutter pub get
-        working-directory: ./portfolio-web
+        run: |
+          cd portfolio-web
+          flutter pub get
         
       - name: Build web app
         run: flutter build web --release --web-renderer=html --no-sound-null-safety
