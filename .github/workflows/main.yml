@@ -4,50 +4,39 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'external-repo/**'
-  
-  workflow_dispatch:
-  
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout external repo
+      - name: Checkout portfolio-web repo
         uses: actions/checkout@v2
         with:
           repository: issaloubani/portfolio-web
-          ref: $BASE_BRANCH
-          path: external-repo
-
-      - name: Set up Flutter
+          ref: main
+          
+      - name: Setup Flutter
         uses: subosito/flutter-action@v1
-
+        with:
+          flutter-version: '2.10.5'
+          
+      - name: Get dependencies
+        run: flutter pub get
+        working-directory: ./portfolio-web
+        
       - name: Build web app
-        run: flutter build web
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: web-build
-          path: build/web
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: web-build
-          path: build-web
-
-      - name: Copy build files to current repo
+        run: flutter build web --release --web-renderer=html --no-sound-null-safety
+        working-directory: ./portfolio-web
+        
+      - name: Copy built files to main branch
         run: |
-          cp -r build-web/* .
-          rm -rf build-web
-
-      - name: Commit and push changes
-        uses: EndBug/add-and-commit@v7
-        with:
-          message: 'Update web build'
-          push: true
+          rm -rf ./build
+          mkdir build
+          cp -r ./portfolio-web/build/web/* ./build/
+          git config --global user.email "issa.loubani.5@gmail.com"
+          git config --global user.name "Issa Loubani"
+          git add -A
+          git commit -m "Update web app"
+          git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
