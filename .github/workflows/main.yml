@@ -44,7 +44,7 @@ jobs:
         run: |
           rm -rf ./build
           mkdir ./build
-          cp -r build/web/* ./build/
+          cp -r build/web/ ./build/
           git config --global user.email "issa.loubani.5@gmail.com"
           git config --global user.name "Issa Loubani"
           git add -A
