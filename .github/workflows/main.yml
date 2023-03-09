@@ -3,7 +3,7 @@ name: Build and deploy Flutter web app
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - 'portfolio-web/**'
   workflow_dispatch:
