@@ -33,10 +33,13 @@ jobs:
       - name: Build web app
         run: flutter build web --release --web-renderer=html --no-sound-null-safety
         working-directory: ${{ github.workspace }}
+      
+      - name: Check workspace contents
+        run: ls ${{ github.workspace }}
         
       - name: Copy built files to main branch
         run: |
-          rm -rf ./build
+          rm -rf build
           mkdir build
           cp -r build/web/* ./build/
           git config --global user.email "issa.loubani.5@gmail.com"
