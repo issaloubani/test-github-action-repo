@@ -42,9 +42,9 @@ jobs:
       
       - name: Copy built files to main branch
         run: |
-          rm -rf /build
-          mkdir /build
-          cp -r build/web/ /build/
+          sudo rm -rf /build
+          sudo mkdir /build
+          sudo cp -r build/web/ /build/
           git config --global user.email "issa.loubani.5@gmail.com"
           git config --global user.name "Issa Loubani"
           git add -A
