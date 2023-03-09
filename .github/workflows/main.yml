@@ -42,13 +42,12 @@ jobs:
       
       - name: Copy built files to main branch
         run: |
-          sudo rm -rf /build
-          sudo mkdir /build
-          sudo cp -r build/web/ /build/
+          cd build/web
+          git init
           git config --global user.email "issa.loubani.5@gmail.com"
           git config --global user.name "Issa Loubani"
           git add -A
           git commit -m "Update web app"
-          git push origin main
+          git push --force origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
