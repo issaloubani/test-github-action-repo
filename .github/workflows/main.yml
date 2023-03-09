@@ -21,13 +21,12 @@ jobs:
           flutter-version: '2.10.5'
           
       - name: Get dependencies
-        run: |
-          cd portfolio-web
-          flutter pub get
+        working-directory: ${{ github.workspace }}/portfolio-web
+        run: flutter pub get
         
       - name: Build web app
         run: flutter build web --release --web-renderer=html --no-sound-null-safety
-        working-directory: ./portfolio-web
+        working-directory: ${{ github.workspace }}/portfolio-web
         
       - name: Copy built files to main branch
         run: |
