@@ -37,6 +37,9 @@ jobs:
       - name: Check workspace contents
         run: ls ${{ github.workspace }}
         
+      - name: Check workspace contents
+        run: ls ${{ github.workspace }}/build        
+      
       - name: Copy built files to main branch
         run: |
           rm -rf ./build
